@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stoompay Bet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Oxanium', sans-serif;
+      background: radial-gradient(circle at top, #000000, #111111);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      background: #000;
+      padding: 30px 20px;
+    }
+    header img {
+      max-width: 200px;
+    }
+    .intro {
+      margin-top: 30px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .btn-primary {
+      background: #facc15;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+    .hidden { display: none; }
+    .games {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 20px;
+    }
+    .game-card {
+      background: #222;
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      transition: transform 0.3s;
+      box-shadow: 0 0 10px #facc15;
+    }
+    .game-card:hover {
+      transform: translateY(-5px);
+    }
+    input {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      width: 100px;
+    }
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      font-size: 14px;
+      background: #000;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="A_logo_for_\"Stoompay_Bet,\"_an_online_casino_brand,.png" alt="Stoompay Bet" />
+    <div class="intro">
+      <button class="btn-primary" onclick="startGame()">Jogar Agora</button>
+    </div>
+  </header>  <main id="gameArea" class="hidden">
+    <h2>Escolha um jogo</h2>
+    <p id="saldo">Saldo: 1500 créditos</p>
+    <div class="games">
+      <div class="game-card">
+        <h3>Crash</h3>
+        <input type="number" id="valorCrash" placeholder="Aposta" value="10" />
+        <button onclick="apostar('Crash')">Jogar</button>
+      </div>
+      <div class="game-card">
+        <h3>Roleta</h3>
+        <input type="number" id="valorRoleta" placeholder="Aposta" value="10" />
+        <button onclick="apostar('Roleta')">Jogar</button>
+      </div>
+      <div class="game-card">
+        <h3>Mines</h3>
+        <input type="number" id="valorMines" placeholder="Aposta" value="10" />
+        <button onclick="apostar('Mines')">Jogar</button>
+      </div>
+    </div>
+  </main>  <footer>
+    Stoompay Bet &copy; 2025 | twitch.tv/stoompaym | instagram.com/stoompaym
+  </footer>  <script>
+    let saldo = 1500;
+    function startGame() {
+      document.querySelector('.intro').classList.add('hidden');
+      document.getElementById('gameArea').classList.remove('hidden');
+      updateSaldo();
+    }
+    function updateSaldo() {
+      document.getElementById('saldo').textContent = Saldo: ${saldo.toFixed(2)} créditos;
+    }
+    function apostar(jogo) {
+      let valor = parseFloat(document.getElementById('valor' + jogo).value);
+      if (isNaN(valor) || valor <= 0 || valor > saldo) {
+        alert('Valor inválido ou saldo insuficiente.');
+        return;
+      }
+      let multiplicador = (Math.random() * 2 + 1).toFixed(2);
+      let ganho = valor * multiplicador;
+      saldo = saldo - valor + ganho;
+      alert(${jogo} | Multiplicador: x${multiplicador}\nVocê ganhou: ${ganho.toFixed(2)} créditos!);
+      updateSaldo();
+    }
+  </script></body>
+</html>
